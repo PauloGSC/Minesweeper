@@ -9,7 +9,7 @@ from game import Grid
 ## yellow = #ffd966 < #f1c232
 ##
 ## \u2620 = skull and bones
-## \u2690 and \u2691 = flags
+## \u2691 = flags
 ## \u23f1 = clock
 ##
 ## prefix for widgets names:
