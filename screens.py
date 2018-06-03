@@ -1,4 +1,4 @@
-from time import monotonic, perf_counter
+from time import monotonic
 import tkinter as tk
 from game import Grid
 
@@ -16,6 +16,11 @@ from game import Grid
 ## but, lab, ent, frm
 
 class Screen:
+    """
+    Abstract class. Sets a window for the screen and retrieves its
+    height and width. Defines a abstract method (show) and a
+    concrete one (destroy).
+    """
 
     def __init__(self, window):
         self.master = window.root
@@ -31,6 +36,10 @@ class Screen:
 
 
 class SetUpScreen(Screen):
+    """
+    Initial game screen. Sets the game's configuration (height of the grid,
+    width of the grid and number of mines).
+    """
 
     def __init__(self, window):
         super().__init__(window)
@@ -122,7 +131,7 @@ class SetUpOption:
     Class that contains 5 objects (tkinter widgets):
     name, entry, minus button, plus button and limits label.
     Also has code to manage these objects and theirs values.
-    Created inside the first frame of the setup screen.
+    Created inside the first frame of the SetUpScreen.
     """
 
     def __init__(self, master, name, mini, maxi):
@@ -187,6 +196,12 @@ class SetUpOption:
 
 
 class GameScreen(Screen):
+    """
+    Main screen of the program.
+    Contains the game's grid, a frame to show flag numbers, a frame
+    to show the timer of the match, a frame showing the match's state,
+    one button to start over/play again and one to return to the SetUpScreen.
+    """
 
     def __init__(self, window):
         super().__init__(window)
@@ -205,15 +220,18 @@ class GameScreen(Screen):
 
         self.frm_grid = tk.Frame(self.master,
                                  width=self.master_w*0.8,
-                                 height=self.master_h, bg=self.master["bg"])
+                                 height=self.master_h,
+                                 bg=self.master["bg"])
 
         self.frm_info = tk.Frame(self.master,
                                  width=self.master_w*0.2,
-                                 height=self.master_h, bg=self.master["bg"])
+                                 height=self.master_h,
+                                 bg=self.master["bg"])
 
         self.frm_flag = tk.Frame(self.frm_info,
                                  width=self.master_w*0.2,
-                                 height=self.master_h*0.2, bg=self.master["bg"])
+                                 height=self.master_h*0.2,
+                                 bg=self.master["bg"])
         self.lab_flag = tk.Label(self.frm_flag,
                                  width=2, height=1,
                                  font=("Ubuntu Mono", 50),
@@ -282,6 +300,7 @@ class GameScreen(Screen):
 
     def setNewGame(self, height, width, n_mines):
         self.grid = Grid(height, width, n_mines)
+        self.time_start = 0 #serve as a control variable too
 
         self.lab_n_flags["text"] = "0/{}".format(n_mines)
         self.lab_time["text"] = "00:00"
@@ -335,10 +354,22 @@ class GameScreen(Screen):
         self.but_cancel.pack(padx=4, pady=(2, 0),
                              ipady=5)
 
+    def updateTime(self):
+        time_now = int(monotonic())
+        passed = time_now - self.time_start
+        m = passed // 60
+        s = passed % 60
+        m = str(m) if m > 9 else "0" + str(m)
+        s = str(s) if s > 9 else "0" + str(s)
+        self.lab_time["text"] = m + ":" + s
+        self.id_time = self.lab_time.after(995, self.updateTime)
+
     def start(self, event):
         self.is_start = True
-        self.now = int(monotonic()) #now time
-        #start chronometer, maybe not
+
+        self.time_start = int(monotonic()) #start time
+        self.updateTime()
+
         self.lab_match.config(fg="black", text="IN GAME")
         row = event.widget.grid_info()["row"]
         col = event.widget.grid_info()["column"]
@@ -351,35 +382,43 @@ class GameScreen(Screen):
         self.play(event)
 
     def play(self, event):
+        """
+        Called when user clicks the mouse's left button.
+        If the square clicked is a flag or is revealed, does nothing.
+        If the square is a mine, the player loses, the grid becomes
+        disabled and the timer stops.
+        If the square is anything else, the game expands the grid from
+        this square. Check if, after the expansion, the player wins.
+        """
+
         row = event.widget.grid_info()["row"]
         col = event.widget.grid_info()["column"]
 
         if self.grid.getSquare(row, col).getState() == 1 \
            or self.grid.getSquare(row, col).getFlag() == "\u2691" \
            and not self.is_start:
-            print("revealed or flagged")
             return #nothing happens
 
         if self.grid.getSquare(row, col).getValue() == "\u2620": #mine
-            #stop chronometer
+            self.lab_time.after_cancel(self.id_time)
             self.lab_match.config(fg="#c63d3d", text="YOU LOSE")
             self.but_overagain.config(bg="#17c651", activebackground="#65c680",
                                       text="Play again")
             self.grid.showAll(lose=True)
             self.grid.getSquare(row, col).getButton().config(
                 disabledforeground="red")
-            print("You lose!")
-            return #you lose
-        else:
+            return
+        else: #normal play
             self.grid.expandPosition(row, col)
             self.updateNFlaggedSquares()
-            if self.hadVictory():
+            if self.hadVictory(): #victory
+                self.lab_time.after_cancel(self.id_time)
+                self.time_start = 0
                 self.grid.showAll(win=True)
                 self.updateNFlaggedSquares()
                 self.lab_match.config(fg="#17c651", text="YOU WIN")
                 self.but_overagain.config(bg="#17c651", activebackground="#65c680",
                                           text="Play again")
-                print("Victory!")
 
         if self.is_start:
             self.is_start = False
@@ -389,6 +428,16 @@ class GameScreen(Screen):
             self.grid.getNFlaggedSquares(), self.grid.getNMines())
 
     def flag(self, event):
+        """
+        Called when player clicks mouse's right button.
+        The square must be unrevealed to be flagged.
+        If square has no flag, it gets a flag and the number of flagged
+        squares increases.
+        If square has a flag, it gets a question mark, and the number of
+        flagged squares decreases.
+        If square has a question mark, it has its flag removed.
+        """
+
         row = event.widget.grid_info()["row"]
         col = event.widget.grid_info()["column"]
         if self.grid.getSquare(row, col).getState() == 0:
@@ -419,6 +468,8 @@ class GameScreen(Screen):
         return True
 
     def destroy(self):
+        if self.time_start != 0: #game started
+            self.lab_time.after_cancel(self.id_time)
         for r in self.grid.getGrid():
             for sq in r:
                 sq.getButton().grid_forget()

@@ -1,9 +1,18 @@
+#Campo minado implementado em Python 3 usando a biblioteca tkinter.
+#Autor: Paulo Gabriel Sena Comasetto
+#E-mail: paulogscomasetto@gmail.com
+
 import tkinter as tk
 from screens import SetUpScreen, GameScreen
 
+"""
+Minesweeper game implemented in Python 3 using tkinter library.
+"""
+
 class Window:
     """
-    Class representing tkinter Tk() window.
+    Class representing the game's main window.
+    Contains the tkinter's root (Tk).
     Manages the communication between the Setup and Game screens.
     """
 
@@ -13,6 +22,7 @@ class Window:
         self.height = 675
         self.root.title("Minesweeper")
         self.root.geometry("{}x{}".format(self.width, self.height))
+        self.root.resizable(width=False, height=False)
         self.root["bg"] = "#c9daf8"
 
         self.is_setup = False
@@ -55,7 +65,7 @@ class Window:
 
             self.game_screen.show()
 
-###########################################################################
+################################################################################
 
 window = Window()
 

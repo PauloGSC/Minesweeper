@@ -14,13 +14,14 @@ class Square:
     """
     Class representing all squares in the rectangular grid of the game.
     Each square has a tkinter Button as an internal attribute.
+    Has also three important attributes: state, value and flag.
     """
 
     def __init__(self, row, col):
         self._row = row
         self._col = col
         self._state = 0 # 0, 1
-        self._value = " " # " ", "N", "\u2620"
+        self._value = " " # " ", "1-8", "\u2620"
         self._flag = "" # "\u2691", "?"
 
     def setButton(self, new_button):
@@ -60,14 +61,14 @@ class Square:
         if new_flag: #isn't empty string
             self._button["text"] = str(new_flag)
         else:
-            # if self._value != "\u2620":
-            #     self._button["text"] = self._value
-            # else:
             self._button["text"] = " "
 
 class Grid:
     """
-    Class containing the game's grid.
+    Class containing the game's grid. Every square of the grid
+    is a Square object.
+    Has methods to handle number of flags, set and count mines,
+    expand from a position, and others.
     """
 
     def __init__(self, height, width, n_mines):
@@ -164,13 +165,18 @@ class Grid:
     def showAll(self, win=False, lose=False):
         for r in self._grid:
             for sq in r:
-                sq.disable()
                 if win:
+                    sq.disable()
                     if sq.getValue() == "\u2620":
                         sq.setFlag("\u2691")
                         sq.getButton()["bg"] = "#6fa8dc"
                         self._n_flagged_squares = self._n_mines
                 if lose:
+                    if sq.getState() == 0:
+                        sq.disable()
+                        sq.getButton()["bg"] = "#6fa8dc"
+                    else:
+                        sq.disable()
                     if sq.getFlag() == "\u2691":
                         if sq.getValue() != "\u2620":
                             sq.getButton().config(text="\u2691",

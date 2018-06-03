@@ -1,4 +1,13 @@
+"""
+Module that expands a bidimensional matrix and finds the surroundings
+of any position in this matrix.
+"""
+
 def expandMatrix(mat, times=1, e=None):
+    """
+    Expands the matrix from the outside, as many times as necessary.
+    The elements added due to the expansion are None by default.
+    """
     mat2 = [row[:] for row in mat]
 
     line = [e for i in range(len(mat2[0]) + (times*2))]
@@ -14,6 +23,12 @@ def expandMatrix(mat, times=1, e=None):
     return mat2
 
 def findSurroundings(mat, p, order=1):
+    """
+    Find the surrounding positions of a certain position in the matrix.
+    The surroundings have order 1 by default.
+    In order to do this, expands the matrix as many times as the surroundings
+    order, to avoid problems with positions in the corner of the matrix.
+    """
     mat2 = [row[:] for row in mat]
 
     if order <= 0: return [p]
