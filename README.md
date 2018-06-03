@@ -1,2 +1,2 @@
-# Minesweeper_Tkinter
-Minesweeper game implemented in Python using Tkinter.
+# Minesweeper
+Minesweeper game implemented in Python using tkinter.
