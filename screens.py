@@ -12,7 +12,7 @@ from game import Grid
 ## \u2690 and \u2691 = flags
 ## \u23f1 = clock
 ##
-## convention for widgets names:
+## prefix for widgets names:
 ## but, lab, ent, frm
 
 class Screen:
@@ -302,7 +302,8 @@ class GameScreen(Screen):
                               font=("Ubuntu Mono", fsize),
                               fg="black", text=" ", activeforeground="black",
                               bg="#6fa8dc", activebackground="#9fc5e8",
-                              highlightbackground="black", highlightthickness=2)
+                              highlightbackground="black", highlightthickness=2,
+                              state="normal")
                 padx = (0, 0)
                 pady = (0, 0)
                 if r == 0:

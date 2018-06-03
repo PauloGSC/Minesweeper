@@ -1,8 +1,14 @@
 from random import randint
 from matrix_expansion import findSurroundings
 
+## colors:
+## blue = #cfe2f3 < #9fc5e8 < #6fa8dc
+## green = #65c680 < #17c651
+## red = #c67474 < #c63d3d
+## yellow = #ffd966 < #f1c232
+##
 ## \u2620 = skull and bones
-## \u269 0 and \u269 1 = flags
+## \u2691 = flag
 
 class Square:
     """
@@ -32,7 +38,7 @@ class Square:
     def getState(self):
         return self._state
 
-    def switchState(self):
+    def disable(self):
         self._state = 1
         self._button.config(state="disabled", bg="#cfe2f3",
                             disabledforeground="black",
@@ -54,10 +60,10 @@ class Square:
         if new_flag: #isn't empty string
             self._button["text"] = str(new_flag)
         else:
-            if self._value != "\u2620":
-                self._button["text"] = self._value
-            else:
-                self._button["text"] = " "
+            # if self._value != "\u2620":
+            #     self._button["text"] = self._value
+            # else:
+            self._button["text"] = " "
 
 class Grid:
     """
@@ -138,7 +144,7 @@ class Grid:
            for row, col in checking:
                if self.getSquare(row, col).getState() == 0 \
                and self.getSquare(row, col).getValue() == " ":
-                    self.getSquare(row, col).switchState()
+                    self.getSquare(row, col).disable()
                     if self.getSquare(row, col).getFlag() == "\u2691":
                         self.removeFlaggedSquare()
                     self.getSquare(row, col) .setFlag("")
@@ -158,8 +164,16 @@ class Grid:
     def showAll(self, win=False, lose=False):
         for r in self._grid:
             for sq in r:
-                #sq.switchState()
+                sq.disable()
                 if win:
-                    pass
-                elif lose:
-                    pass
+                    if sq.getValue() == "\u2620":
+                        sq.setFlag("\u2691")
+                        sq.getButton()["bg"] = "#6fa8dc"
+                        self._n_flagged_squares = self._n_mines
+                if lose:
+                    if sq.getFlag() == "\u2691":
+                        if sq.getValue() != "\u2620":
+                            sq.getButton().config(text="\u2691",
+                                                  disabledforeground="red")
+                        else:
+                            sq.getButton().config(text="\u2691")
