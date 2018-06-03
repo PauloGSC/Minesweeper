@@ -2,7 +2,7 @@
 #Autor: Paulo Gabriel Sena Comasetto
 #E-mail: paulogscomasetto@gmail.com
 
-import tkinter as tk
+from tkinter import Tk, mainloop
 from screens import SetUpScreen, GameScreen
 
 """
@@ -17,7 +17,7 @@ class Window:
     """
 
     def __init__(self):
-        self.root = tk.Tk()
+        self.root = Tk()
         self.width = 1024
         self.height = 675
         self.root.title("Minesweeper")
@@ -71,4 +71,4 @@ window = Window()
 
 window.showSetUpScreen()
 
-tk.mainloop()
+mainloop()
