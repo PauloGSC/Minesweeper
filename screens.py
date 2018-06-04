@@ -74,17 +74,17 @@ class SetUpScreen(Screen):
         self.frm_play.pack()
 
         self.height_option.lab_name.grid(row=0, column=0,
-                                         padx=(50, 10), pady=(25, 10))
+                                         padx=(50, 10), pady=(50, 10))
         self.height_option.ent.grid(row=0, column=1,
-                                    padx=(10, 2), pady=(25, 10))
+                                    padx=(10, 2), pady=(50, 10))
         self.height_option.but_minus.grid(row=0, column=2,
-                                          padx=(2, 2), pady=(25, 10),
+                                          padx=(2, 2), pady=(50, 10),
                                           ipadx=8)
         self.height_option.but_plus.grid(row=0, column=3,
-                                         padx=(2, 20), pady=(25, 10),
+                                         padx=(2, 20), pady=(50, 10),
                                          ipadx=8)
         self.height_option.lab_limits.grid(row=0, column=4,
-                                           padx=(20, 0), pady=(25, 10))
+                                           padx=(20, 0), pady=(50, 10))
 
         self.width_option.lab_name.grid(row=1, column=0,
                                         padx=(50, 10), pady=(10, 45))
