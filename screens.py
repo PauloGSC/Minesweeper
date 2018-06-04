@@ -9,7 +9,7 @@ from game import Grid
 ## yellow = #ffd966 < #f1c232
 ##
 ## \u2620 = skull and bones
-## \u2691 = flags
+## \u2690 and \u2691 = flags
 ## \u23f1 = clock
 ##
 ## prefix for widgets names:
@@ -74,17 +74,17 @@ class SetUpScreen(Screen):
         self.frm_play.pack()
 
         self.height_option.lab_name.grid(row=0, column=0,
-                                         padx=(50, 10), pady=(75, 10))
+                                         padx=(50, 10), pady=(25, 10))
         self.height_option.ent.grid(row=0, column=1,
-                                    padx=(10, 2), pady=(75, 10))
+                                    padx=(10, 2), pady=(25, 10))
         self.height_option.but_minus.grid(row=0, column=2,
-                                          padx=(2, 2), pady=(75, 10),
+                                          padx=(2, 2), pady=(25, 10),
                                           ipadx=8)
         self.height_option.but_plus.grid(row=0, column=3,
-                                         padx=(2, 20), pady=(75, 10),
+                                         padx=(2, 20), pady=(25, 10),
                                          ipadx=8)
         self.height_option.lab_limits.grid(row=0, column=4,
-                                           padx=(20, 0), pady=(75, 10))
+                                           padx=(20, 0), pady=(25, 10))
 
         self.width_option.lab_name.grid(row=1, column=0,
                                         padx=(50, 10), pady=(10, 45))
