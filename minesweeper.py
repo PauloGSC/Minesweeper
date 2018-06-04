@@ -19,7 +19,7 @@ class Window:
     def __init__(self):
         self.root = Tk()
         self.width = 1024
-        self.height = 650
+        self.height = 675
         self.root.title("Minesweeper")
         self.root.geometry("{}x{}".format(self.width, self.height))
         self.root.resizable(width=False, height=False)

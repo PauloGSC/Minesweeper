@@ -10,7 +10,7 @@ from game import Grid
 ##
 ## \u2620 = skull and bones
 ## \u2690 and \u2691 = flags
-## \u23f1 = clock
+## \u231a = clock (\u23f1, \u231b, \u29d6, \u29d7)
 ##
 ## prefix for widgets names:
 ## but, lab, ent, frm
@@ -74,17 +74,17 @@ class SetUpScreen(Screen):
         self.frm_play.pack()
 
         self.height_option.lab_name.grid(row=0, column=0,
-                                         padx=(50, 10), pady=(50, 10))
+                                         padx=(50, 10), pady=(70, 10))
         self.height_option.ent.grid(row=0, column=1,
-                                    padx=(10, 2), pady=(50, 10))
+                                    padx=(10, 2), pady=(70, 10))
         self.height_option.but_minus.grid(row=0, column=2,
-                                          padx=(2, 2), pady=(50, 10),
+                                          padx=(2, 2), pady=(70, 10),
                                           ipadx=8)
         self.height_option.but_plus.grid(row=0, column=3,
-                                         padx=(2, 20), pady=(50, 10),
+                                         padx=(2, 20), pady=(70, 10),
                                          ipadx=8)
         self.height_option.lab_limits.grid(row=0, column=4,
-                                           padx=(20, 0), pady=(50, 10))
+                                           padx=(20, 0), pady=(70, 10))
 
         self.width_option.lab_name.grid(row=1, column=0,
                                         padx=(50, 10), pady=(10, 45))
@@ -250,7 +250,7 @@ class GameScreen(Screen):
         self.lab_clock = tk.Label(self.frm_clock,
                                   width=2, height=1,
                                   font=("Ubuntu Mono", 55),
-                                  text="\u23f1",
+                                  text="\u231a",
                                   bg=self.master["bg"], fg="black")
         self.lab_time = tk.Label(self.frm_clock,
                                  width=5, height=1,
