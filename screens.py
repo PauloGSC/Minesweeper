@@ -276,11 +276,12 @@ class GameScreen(Screen):
                                     bg=self.master["bg"])
         self.but_overagain = tk.Button(self.frm_options,
                                        width=10, height=1,
+                                       state="disabled",
+                                       disabledforeground="black",
                                        font=("Ubuntu Mono", 26, "bold"),
-                                       bg="#f1c232", fg="black",
+                                       bg="#ffd966",
                                        highlightbackground="black",
-                                       highlightthickness=2,
-                                       activebackground="#ffd966")
+                                       highlightthickness=2)
         self.but_cancel = tk.Button(self.frm_options,
                                     width=10, height=1,
                                     font=("Ubuntu Mono", 26, "bold"),
@@ -305,8 +306,10 @@ class GameScreen(Screen):
         self.lab_n_flags["text"] = "0/{}".format(n_mines)
         self.lab_time["text"] = "00:00"
         self.lab_match.config(fg="#f1c232", text="WAITING")
-        self.but_overagain.config(bg="#f1c232", activebackground="#ffd966",
-                                  text="Start over", command=self.overAgain)
+        self.but_overagain.config(bg="#ffd966",
+                                  text="Start over", state="disabled",
+                                  disabledforeground="black",
+                                  command=self.overAgain)
 
     def show(self):
         self.frm_grid.pack(side="left")
@@ -371,6 +374,8 @@ class GameScreen(Screen):
         self.updateTime()
 
         self.lab_match.config(fg="black", text="IN GAME")
+        self.but_overagain.config(state="normal", fg="black",
+                                  bg="#f1c232", activebackground="#ffd966")
         row = event.widget.grid_info()["row"]
         col = event.widget.grid_info()["column"]
         self.grid.setMines(row, col)
