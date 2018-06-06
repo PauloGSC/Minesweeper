@@ -9,7 +9,7 @@ from screens import SetUpScreen, GameScreen
 Minesweeper game implemented in Python 3 using tkinter library.
 """
 
-class Window:
+class MainWindow:
     """
     Class representing the game's main window.
     Contains the tkinter's root (Tk).
@@ -67,8 +67,8 @@ class Window:
 
 ################################################################################
 
-window = Window()
+main_window = MainWindow()
 
-window.showSetUpScreen()
+main_window.showSetUpScreen()
 
 mainloop()
