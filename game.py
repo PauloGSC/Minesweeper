@@ -148,7 +148,7 @@ class Grid:
                     self.getSquare(row, col).disable()
                     if self.getSquare(row, col).getFlag() == "\u2691":
                         self.removeFlaggedSquare()
-                    self.getSquare(row, col) .setFlag("")
+                    self.getSquare(row, col).setFlag("")
 
                     n_mines = self.countMines(row, col)
                     if n_mines > 0:
