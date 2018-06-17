@@ -9,7 +9,7 @@ from game import Grid
 ## yellow = #ffd966 < #f1c232
 ##
 ## \u2620 = skull and bones
-## \u2690 and \u2691 = flags
+## \u2691 = flags
 ## \u231a = clock (\u23f1, \u231b, \u29d6, \u29d7)
 ##
 ## prefix for widgets names:
@@ -59,7 +59,8 @@ class SetUpScreen(Screen):
 
         self.but_play = tk.Button(self.frm_play,
                                   text="PLAY", font=("Ubuntu Mono", 50, "bold"),
-                                  highlightbackground="black", highlightthickness=5,
+                                  highlightbackground="black",
+                                  highlightthickness=5,
                                   bg="#17c651", activebackground="#65c680")
 
         for opt in [self.height_option, self.width_option]:
@@ -67,7 +68,8 @@ class SetUpScreen(Screen):
                 wid.bind("<FocusOut>", self.correctMinesLimits)
                 wid.bind("<Leave>", self.correctMinesLimits)
 
-        self.options = [self.height_option, self.width_option, self.mines_option]
+        self.options = [self.height_option, self.width_option,
+                        self.mines_option]
 
     def show(self):
         self.frm_options.pack()
@@ -154,12 +156,14 @@ class SetUpOption:
         self.but_minus = tk.Button(self.master,
                                    text="-", font=("Ubuntu Mono", 45, "bold"),
                                    bg="#6fa8dc", activebackground="#9fc5e8",
-                                   highlightbackground="black", highlightthickness=2,
+                                   highlightbackground="black",
+                                   highlightthickness=2,
                                    command=self.decreaseNumber)
         self.but_plus = tk.Button(self.master,
                                   text="+", font=("Ubuntu Mono", 45, "bold"),
                                   bg="#6fa8dc", activebackground="#9fc5e8",
-                                  highlightbackground="black", highlightthickness=2,
+                                  highlightbackground="black",
+                                  highlightthickness=2,
                                   command=self.increaseNumber)
 
         self.lab_limits = tk.Label(self.master,
@@ -324,7 +328,8 @@ class GameScreen(Screen):
                               font=("Ubuntu Mono", fsize),
                               fg="black", text=" ", activeforeground="black",
                               bg="#6fa8dc", activebackground="#9fc5e8",
-                              highlightbackground="black", highlightthickness=2,
+                              highlightbackground="black",
+                              highlightthickness=2,
                               state="normal")
                 padx = (0, 0)
                 pady = (0, 0)

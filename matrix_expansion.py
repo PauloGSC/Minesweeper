@@ -22,6 +22,7 @@ def expandMatrix(mat, times=1, e=None):
 
     return mat2
 
+
 def findSurroundings(mat, p, order=1):
     """
     Find the surrounding positions of a certain position in the matrix.
