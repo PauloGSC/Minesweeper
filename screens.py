@@ -67,6 +67,8 @@ class SetUpScreen(Screen):
             for wid in [opt.ent, opt.but_minus, opt.but_plus]:
                 wid.bind("<FocusOut>", self.correctMinesLimits)
                 wid.bind("<Leave>", self.correctMinesLimits)
+        self.but_play.bind("<FocusIn>", self.correctMinesLimits)
+        self.but_play.bind("<Enter>", self.correctMinesLimits)
 
         self.options = [self.height_option, self.width_option,
                         self.mines_option]
