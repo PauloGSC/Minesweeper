@@ -1,7 +1,3 @@
-#Campo minado implementado em Python 3 usando a biblioteca tkinter.
-#Autor: Paulo Gabriel Sena Comasetto
-#E-mail: paulogscomasetto@gmail.com
-
 from tkinter import Tk, mainloop
 from screens import SetUpScreen, GameScreen
 
