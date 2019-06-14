@@ -1,6 +1,6 @@
-# :boom: Minesweeper :warning:
+# :bomb: Minesweeper :boom:
 
-Minesweeper game implemented in Python with a nice GUI :sunglasses:.
+Minesweeper game implemented in Python with a nice GUI :sunglasses:
 
 ### :page_facing_up: Requirements
 
