@@ -1,15 +1,15 @@
-# Minesweeper
+# :boom: Minesweeper :warning:
 
-Minesweeper game implemented in Python with a nice GUI.
+Minesweeper game implemented in Python with a nice GUI :sunglasses:.
 
-### Requirements
+### :page_facing_up: Requirements
 
-This game was written in Python using the `tkinter` library. Thus, you must install both to get started.
+This game was written in `Python 3` using the `tkinter` library. Thus, you must have both to get started.
 
-### How to execute
+### :rocket: Launching/Executing
 
 In order to play the game, clone/download the repo and execute the `minesweeper.py` file.
 
-### How to play
+### :checkered_flag: How to play :skull:
 
 Follow what this [this website](https://www.instructables.com/id/How-to-play-minesweeper/) has to say.
