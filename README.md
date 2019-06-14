@@ -4,7 +4,7 @@ Minesweeper game implemented in Python with a nice GUI :sunglasses:.
 
 ### :page_facing_up: Requirements
 
-This game was written in `Python 3` using the `tkinter` library. Thus, you must have both to get started.
+This game was written in `Python 3` using the `Tkinter` library. Thus, you must have both to get started.
 
 ### :rocket: Launching/Executing
 
