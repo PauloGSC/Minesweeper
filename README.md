@@ -12,4 +12,4 @@ In order to play the game, clone/download the repo and execute the `minesweeper.
 
 ### :checkered_flag: How to play :skull:
 
-Follow what this [this website](https://www.instructables.com/id/How-to-play-minesweeper/) has to say.
+Follow what [this website](https://www.instructables.com/id/How-to-play-minesweeper/) has to say.
